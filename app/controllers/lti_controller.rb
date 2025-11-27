@@ -37,7 +37,7 @@ class LtiController < ApplicationController
 
     file_name = nil
     if params.key?(:custom_module_file_name)
-      lms_access_id = LmsAccess.where(consumer_key: params[:oauth_consumer_key]).pluck(:id).first
+      lms_access_id = LmsAccess.where(consumer_key: request.request_parameters['oauth_consumer_key']).pluck(:id).first
       OdsaModuleProgress.get_progress(current_user.id,
                                       params[:custom_inst_chapter_module_id],
                                       params[:custom_inst_book_id], params[:lis_outcome_service_url],
